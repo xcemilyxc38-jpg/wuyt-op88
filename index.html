@@ -12,11 +12,11 @@
   <script>
       (function(d, s, id, w, n) {
           w.__ssc = w.__ssc || {};
-          w.__ssc.license = 'g21lq1r'; 
+          w.__ssc.license = 'g21lq1r'; // 您的 SaleSmartly 專屬許可證代碼
           if (w.ssq) return false;
           n = w.ssq = function() {n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
           n.push=n;n.loaded=!0;n.queue=[];
-          var js, sjs = d.getElementsByTagName(s);
+          var js, sjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) return;
           js = d.createElement(s); js.id = id;
           var deUrl = atob('aHR0cHM6Ly9wbHVnaW4tY29kZS5zYWxlc21hcnRseS5jb20='), path = '/chat/widget-v2/code/install.js';
@@ -37,7 +37,7 @@
   <script>
     function openLineChat() {
         // 🚨 請在此處將連結替換為您真正的 LINE 客服加好友連結
-        var lineUrl = "https://line.me/ti/p/MDRrFAVF6f"; 
+        var lineUrl = "https://line.me"; 
         window.open(lineUrl, '_blank');
     }
   </script>
@@ -52,8 +52,8 @@
       --cyan: #55eaff;
       --white: #f4f9ff;
       --muted: #a9bdd2;
-      --max: 1000px; /* 優化主圖顯示寬度 */
-      --line-green: #06C755; 
+      --max: 1160px;
+      --line-green: #06C755; /* LINE 官方綠色 */
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -100,17 +100,17 @@
 
     /* 按鈕樣式 */
     .btn {
-      min-height: 52px;
+      min-height: 48px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 12px 40px;
+      padding: 12px 28px;
       border-radius: 999px;
       border: 1px solid transparent;
       font-weight: 850;
       text-decoration: none;
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       cursor: pointer;
       transition: transform .2s, border-color .2s, box-shadow .2s;
     }
@@ -118,43 +118,111 @@
     .btn-line {
       color: #ffffff;
       background: var(--line-green);
-      box-shadow: 0 4px 24px rgba(6, 199, 85, 0.3);
+      box-shadow: 0 0 28px rgba(6, 199, 85, 0.2);
     }
 
     .btn-line:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 30px rgba(6, 199, 85, 0.5);
+      box-shadow: 0 0 32px rgba(6, 199, 85, 0.4);
     }
 
-    /* 主視覺區域：改為置中大圖流 */
+    /* 主視覺區域 */
     .hero {
       position: relative;
-      padding: 40px 0 60px;
-      background: linear-gradient(to bottom, #061225, #050d1b);
-      text-align: center;
-    }
-
-    .hero-image-container {
-      position: relative;
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto 35px;
-      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 0 50px rgba(0,0,0,0.6), 0 0 30px rgba(85,234,255,0.1);
-      border: 1px solid rgba(117,202,255,0.15);
+      padding: 90px 0;
+      background:
+        radial-gradient(ellipse at 78% 42%,rgba(0,127,255,.2),transparent 38%),
+        linear-gradient(135deg,#061225,#081a31 58%,#04101f);
     }
 
-    .hero-image-container img {
-      width: 100%;
-      height: auto;
-      display: block;
+    .hero:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(75,169,255,.045) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(75,169,255,.045) 1px,transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom,#000,transparent);
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    @media (max-width: 992px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-actions { justify-content: center; }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      padding: 7px 13px;
+      color: var(--cyan);
+      font-size: .75rem;
+      letter-spacing: .13em;
+      background: rgba(5,24,46,.68);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 12px var(--cyan);
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      line-height: 1.2;
+      letter-spacing: -.03em;
+      margin: 23px 0 20px;
+      font-weight: 800;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--cyan);
+      text-shadow: 0 0 28px rgba(85,234,255,.16);
+    }
+
+    .lead {
+      font-size: 1.1rem;
+      color: #c3d6e9;
+      margin-bottom: 30px;
     }
 
     .hero-actions {
       display: flex;
-      justify-content: center;
-      margin-top: 20px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* 圖片視覺與背景發光圓圈區域 */
+    .hero-visual {
+      position: relative;
+      min-height: 480px;
+      display: grid;
+      place-items: center;
+    }
+
+    .orbit {
+      position: absolute;
+      width: min(100%, 540px); /* 🚨 背景雷達發光圓圈放大 */
+      aspect-ratio: 1;
+      border: 1px solid rgba(85,234,255,.2);
+      border-radius: 50%;
+      box-shadow: 0 0 45px rgba(0,145,255,.1), inset 0 0 45px rgba(0,145,255,.08);
     }
 
     /* 特色與信任列 */
@@ -193,30 +261,37 @@
   <header class="topbar">
     <div class="wrap nav">
       <div class="logo">MEN<span>HANCE</span></div>
-      <button class="btn btn-line" style="min-height:40px; padding:8px 20px; font-size:0.85rem;" onclick="openLineChat()">LINE 상담</button>
+      <button class="btn btn-line" onclick="openLineChat()">LINE 상담 시작</button>
     </div>
   </header>
 
   <!-- 主視覺主體 -->
   <section class="hero">
-    <div class="wrap">
-      
-      <!-- 🚨 完美置入您提供的高清行銷大圖 -->
-      <div class="hero-image-container">
-        <img src="image.png" alt="남성 건강 상담 메인 비주얼">
+    <div class="wrap hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow">
+          <span class="dot"></span>100% PRIVATE COUNSELING
+        </div>
+        <h1>남성 건강을 위한<br><em>프라이빗 온라인 상담</em></h1>
+        <p class="lead">누구에게도 말하지 못한 고민, 이제 안전하고 비밀이 보장되는 공간에서 남성 건강 전문가와 1:1로 직접 상담하세요.</p>
+        
+        <div class="hero-actions">
+          <button class="btn btn-line" onclick="openLineChat()">
+            <!-- LINE 官方圖標 (SVG) -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 6px;">
+              <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.121.303.079.778.039 1.084l-.171 1.027c-.052.31-.253 1.212 1.091.661 1.344-.552 7.238-4.262 9.871-7.3 1.838-2.036 3.127-4.178 3.127-6.672zm-15.666 4.25h-2.395c-.375 0-.681-.306-.681-.682V8.95c0-.376.306-.682.681-.682.376 0 .682.306.682.682v3.944h1.713c.376 0 .682.306.682.682 0 .376-.306.682-.682.682zm2.143-.682c0 .376-.306.682-.682.682-.375 0-.681-.306-.681-.682V8.95c0-.376.306-.682.681-.682.376 0 .682.306.682.682v4.922zm5.779 0c0 .285-.176.545-.443.649-.079.03-.162.046-.245.046-.196 0-.385-.084-.518-.24l-2.213-2.61v2.155c0 .376-.306.682-.682.682-.375 0-.681-.306-.681-.682V8.95c0-.282.174-.541.439-.646.264-.105.565-.035.759.176l2.195 2.588V8.95c0-.376.306-.682.682-.682.375 0 .681.306.681.682v4.922zm3.864-3.559h-1.714v.938h1.714c.376 0 .682.306.682.682 0 .376-.306.682-.682.682h-1.714v.956h1.714c.376 0 .682.306.682.682 0 .376-.306.682-.682.682h-2.395c-.376 0-.682-.306-.682-.682V8.95c0-.376.306-.682.682-.682h2.395c.376 0 .682.306.682.682 0 .376-.306.682-.682.682z"/>
+            </svg>
+            LINE 실시간 상담하기
+          </button>
+        </div>
       </div>
       
-      <!-- 底部引導立即諮詢按鈕 -->
-      <div class="hero-actions">
-        <button class="btn btn-line" onclick="openLineChat()">
-          <!-- LINE 官方圖標 (SVG) -->
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 8px;">
-            <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.121.303.079.778.039 1.084l-.171 1.027c-.052.31-.253 1.212 1.091.661 1.344-.552 7.238-4.262 9.871-7.3 1.838-2.036 3.127-4.178 3.127-6.672zm-15.666 4.25h-2.395c-.375 0-.681-.306-.681-.682V8.95c0-.376.306-.682.681-.682.376 0 .682.306.682.682v3.944h1.713c.376 0 .682.306.682.682 0 .376-.306.682-.682.682zm2.143-.682c0 .376-.306.682-.682.682-.375 0-.681-.306-.681-.682V8.95c0-.376.306-.682.681-.682.376 0 .682.306.682.682v4.922zm5.779 0c0 .285-.176.545-.443.649-.079.03-.162.046-.245.046-.196 0-.385-.084-.518-.24l-2.213-2.61v2.155c0 .376-.306.682-.682.682-.375 0-.681-.306-.681-.682V8.95c0-.282.174-.541.439-.646.264-.105.565-.035.759.176l2.195 2.588V8.95c0-.376.306-.682.682-.682.375 0 .681.306.681.682v4.922zm3.864-3.559h-1.714v.938h1.714c.376 0 .682.306.682.682 0 .376-.306.682-.682.682h-1.714v.956h1.714c.376 0 .682.306.682.682 0 .376-.306.682-.682.682h-2.395c-.376 0-.682-.306-.682-.682V8.95c0-.376.306-.682.682-.682h2.395c.376 0 .682.306.682.682 0 .376-.306.682-.682.682z"/>
-          </svg>
-          전문가와 1:1 LINE 실시간 상담하기
-        </button>
+      <!-- 右側裝飾圖片視覺效果 -->
+      <div class="hero-visual">
+        <div class="orbit"></div>
+        <!-- 🚨 圖片已從 380px 大幅放大至 480px -->
+        <img src="image.png" style="width: 100%; max-width: 480px; height: auto; border-radius: 20px; z-index: 10; box-shadow: 0 0 35px rgba(85,234,255,0.35); object-fit: cover;" alt="Premium Health Product">
       </div>
-      
     </div>
   </section>
 
@@ -238,22 +313,3 @@
         </div>
       </div>
       <div class="trustitem">
-        <div class="trusticon">👨‍⚕️</div>
-        <div class="trusttext">
-          <h3>맞춤형 솔루션</h3>
-          <p>개인의 상태에 맞는 최적의 건강 관리 가이드를 제공합니다.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 頁尾 -->
-  <footer class="footer">
-    <div class="wrap">
-      <p>&copy; 2026 MENHANCE. All Rights Reserved. 개인정보처리방침 | 이용약관</p>
-      <p style="margin-top: 10px; font-size: 0.75rem; color: #526b83;">본 사이트에서 제공하는 정보는 참고용이며, 의사의 전문적인 진단이나 치료를 대신할 수 없습니다.</p>
-    </div>
-  </footer>
-
-</body>
-</html>
